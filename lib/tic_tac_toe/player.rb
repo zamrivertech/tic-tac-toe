@@ -6,12 +6,9 @@
 # - if name is not set, id of player should increment like...
 # ...player1 and player2 or variable name
 class Player
-  attr_reader :name
-  attr_accessor :color
+  attr_reader :color, :marker, :name
 
-  def initialize(color, name = 'player1', marker)
-    # VALIDATE MARKER
-
+  def initialize(color, marker, name = 'player1')
     @name =  name
     @color = color
     @marker = marker
