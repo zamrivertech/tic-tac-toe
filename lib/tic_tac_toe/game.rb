@@ -1,1 +1,4 @@
-puts 'Hey, this is game class!'
+# Game class: responsible for game logic
+# Attributes:
+class Game
+end
