@@ -15,20 +15,6 @@ class Player
   end
 
   # FIXXXXXXX
-
-  def set_player_info(id, color, marker, name)
-    if id == 1
-      @player1 = Player.new(color, marker, name)
-    else
-      @player2 = Player.new(color, marker, name)
-    end
-  end
-
-  def get_player_info(id)
-    if id == 1
-      [@player1.color, @player1.marker, @player1.name]
-    else
-      [@player2.color, @player2.marker, @player2.name]
-    end
-  end
+  # use array or better, hash to save player data and id
+  # Hash use to save player data is better
 end
