@@ -9,8 +9,11 @@ class Player
   attr_reader :name
   attr_accessor :color
 
-  def initialize(color, name = 'player1')
+  def initialize(color, name = 'player1', marker)
+    # VALIDATE MARKER
+
     @name =  name
     @color = color
+    @marker = marker
   end
 end
