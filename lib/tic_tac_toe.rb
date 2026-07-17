@@ -1,10 +1,16 @@
 require_relative 'tic_tac_toe/player'
 require_relative 'tic_tac_toe/game'
 
-Game.new.introduction
+puts 'Welcome'
 
-puts Game.new.set_player(1, 'Hellboy', 'X')
-puts Game.new.set_player(2, 'Tony', 'O')
+puts 'Player1, please enter your marker:'
 
-puts Game.new.get_player(1)
-puts Game.new.get_player(2)
+player1 = Player.new(gets)
+
+puts "Player1: #{player1.marker}"
+
+puts 'Player2, please enter your marker:'
+
+player2 = Player.new(gets)
+
+puts "Player2: #{player2.marker}"
