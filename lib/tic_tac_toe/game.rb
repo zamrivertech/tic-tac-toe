@@ -27,7 +27,6 @@ class Game
         pass = false
         return input
       else
-        pass = true
         puts 'Enter X or O'
       end
     end
