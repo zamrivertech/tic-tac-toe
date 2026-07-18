@@ -7,6 +7,8 @@ class Game
     @player1 = Player
     @player2 = Player
     set_players
+    @board = Board.new
+    @board.display_grid
   end
 
   def set_players
