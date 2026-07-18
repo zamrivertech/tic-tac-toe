@@ -4,7 +4,7 @@ class Board
     @board_array = [nil, nil, nil, nil, nil, nil, nil, nil, nil]
   end
 
-  def display_grid
+  def display_grid # rubocop:disable Metrics/MethodLength
     count = 0
     puts '========='
     @board_array.each do |item|
