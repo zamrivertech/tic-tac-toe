@@ -1,5 +1,4 @@
 # Game class: responsible for game logic and flow
-# Attributes:
 class Game
   attr_reader :player1, :player2
 
@@ -8,6 +7,7 @@ class Game
     @player2 = Player
     set_players
     @board = Board.new
+    @board.set_gridpoint(@player1.marker, 2)
     @board.display_grid
   end
 

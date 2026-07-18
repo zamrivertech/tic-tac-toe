@@ -1,6 +1,7 @@
+# Game class: responsible board logic and display
 class Board
   def initialize
-    @board_array = [[0], [1], [2], [3], [4], [5], [6], [7], [9]]
+    @board_array = [nil, nil, nil, nil, nil, nil, nil, nil, nil]
   end
 
   def display_grid
@@ -8,11 +9,15 @@ class Board
     @board_array.each do |item|
       count += 1
       if [3, 6, 9].include?(count)
-        print item
+        print "|#{item || count}|"
         puts "\n"
       else
-        print item
+        print "|#{item || count}|"
       end
     end
+  end
+
+  def set_gridpoint(marker, point)
+    @board_array[point] = marker
   end
 end
