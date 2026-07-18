@@ -6,6 +6,7 @@ class Board
 
   def display_grid
     count = 0
+    puts '========='
     @board_array.each do |item|
       count += 1
       if [3, 6, 9].include?(count)
@@ -15,6 +16,7 @@ class Board
         print "|#{item || count}|"
       end
     end
+    puts '========='
   end
 
   def set_gridpoint(marker, point)
