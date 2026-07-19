@@ -20,6 +20,6 @@ class Board
   end
 
   def set_gridpoint(marker, point)
-    @board_array[point] = marker
+    @board_array[point - 1] = marker
   end
 end

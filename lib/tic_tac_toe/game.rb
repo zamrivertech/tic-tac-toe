@@ -11,13 +11,16 @@ class Game
   end
 
   def set_players
+    system 'clear'
     puts 'Welcome!'
     puts 'Player1, please enter your marker:'
     @player1 = Player.new(validate_player_marker)
     puts "Player1: #{@player1.marker}"
+    system 'clear'
     puts 'Player2, please enter your marker:'
     @player2 = Player.new(validate_player_marker)
     puts "Player2: #{@player2.marker}"
+    system 'clear'
   end
 
   def validate_player_marker
@@ -34,14 +37,16 @@ class Game
   end
 
   def player_turn(player, board)
+    board.display_grid
+    puts 'Player enter your point:'
     while true
-      board.display_grid
-      print "For #{player.marker} marker, choose a point:"
       point = gets.chomp.to_i
-      if point.between?(0, 9) # rubocop:disable Style/Next
+      if point.between?(0, 9) && point.is_a?(Integer)
         board.set_gridpoint(player.marker, point)
         board.display_grid
         break
+      else
+        puts 'Enter a valid point:'
       end
     end
   end
