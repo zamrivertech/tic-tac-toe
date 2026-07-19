@@ -37,12 +37,11 @@ class Game
   def player_turn(player, board)
     board.display_grid
     puts "#{player.name}'s turn, choose a number to mark:"
-    while true
+    while @board.grid.include?(nil) # break if winner exists
       point = gets.chomp.to_i
       if point.between?(1, 9) && point.is_a?(Integer)
         board.set_gridpoint(player.marker, point)
         board.display_grid
-        break
       else
         puts 'Enter a valid number between 1 and 9:'
       end
