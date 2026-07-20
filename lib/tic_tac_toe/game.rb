@@ -36,10 +36,12 @@ class Game
     end
   end
 
-  def player_grid(board)
-    while @board.grid.include?(nil) # break if winner exists
+  def player_grid(board) # rubocop:disable Metrics/MethodLength
+    # @board.grid.include?(nil)
+    while true # break if winner exists # rubocop:disable Style/InfiniteLoop
       player = player_turn
       board.display_grid
+      p check_winner
       print "#{player.name}'s turn, choose a number to mark:"
       point = gets.chomp.to_i
       if point.between?(1, 9) && point.is_a?(Integer)
@@ -47,6 +49,10 @@ class Game
         system 'clear'
       else
         print 'Enter a valid number between 1 and 9:'
+      end
+      if check_winner
+        puts "#{player.name} wins!"
+        break
       end
     end
   end
@@ -70,5 +76,18 @@ class Game
         return @player2 # rubocop:disable Style/RedundantReturn
       end
     end
+  end
+
+  def check_winner
+    # horizontal check
+    if @board.grid.slice(0, 3).all?('X' || 'O')
+      return true
+    elsif @board.grid.slice(3, 3).all?('X' || 'O') # rubocop:disable Lint/DuplicateBranch
+      return true
+    elsif @board.grid.slice(6, 3).all?('X' || 'O') # rubocop:disable Lint/DuplicateBranch
+      return true
+    end
+
+    false
   end
 end
