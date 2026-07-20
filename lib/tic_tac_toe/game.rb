@@ -88,6 +88,13 @@ class Game
       return true
     end
 
+    # vertical check
+    # column 1
+    # if @board.grid.select { |item| @board.grid.index(item) % 3 == 0}.all?('X' || 'O')
+    #   p @board.grid
+    #   return true
+    # end
+
     false
   end
 end
