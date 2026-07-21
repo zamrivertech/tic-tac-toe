@@ -20,7 +20,7 @@ class Game
     while true # break if winner exists # rubocop:disable Style/InfiniteLoop
       player = player_turn
       board.display_grid
-      p check_winner
+      p player.marker
       if check_winner
         board.display_grid
         puts "#{@@previous_player.name}: #{@@previous_player.marker} wins!"

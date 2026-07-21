@@ -10,7 +10,7 @@ class Player
     print "#{@name}, enter your marker:"
     # it is probably not safe to have gets directly here...
     # ...I needed the print first then ask for a marker
-    @marker = marker if validate_marker(gets.chomp)
+    @marker = validate_marker(gets.chomp)
   end
 
   def validate_marker(marker)
