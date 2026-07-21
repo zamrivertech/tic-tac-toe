@@ -3,35 +3,16 @@ class Game
   @@previous_player = nil # rubocop:disable Style/ClassVars
 
   def initialize
-    @player1 = Player
-    @player2 = Player
-    set_players
+    intro
     @board = Board.new
     player_grid(@board)
   end
 
-  def set_players
+  def intro
     system 'clear'
     puts 'Welcome to TicTacToe!'
-    print 'player1, please enter your marker:'
-    @player1 = Player.new(validate_player_marker)
-    system 'clear'
-    print 'player2, please enter your marker:'
-    @player2 = Player.new(validate_player_marker)
-    system 'clear'
-  end
-
-  def validate_player_marker
-    pass = true
-    while pass
-      input = gets.chomp
-      if %w[X O].include?(input) && input.length == 1
-        pass = false
-        return input
-      else
-        puts 'Enter X or O'
-      end
-    end
+    @player1 = Player.new
+    @player2 = Player.new
   end
 
   def player_grid(board) # rubocop:disable Metrics/MethodLength
