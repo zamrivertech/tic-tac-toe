@@ -1,7 +1,5 @@
 # Game class: responsible for game logic and flow
 class Game
-  attr_reader :player1, :player2
-
   @@previous_player = nil # rubocop:disable Style/ClassVars
 
   def initialize
