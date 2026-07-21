@@ -14,14 +14,11 @@ class Player
   end
 
   def validate_marker(marker)
-    pass = true
-    while pass
-      if %w[X O].include?(marker) && marker.length == 1
-        pass = false
-        return marker
-      else
-        puts 'Enter X or O'
-      end
+    if %w[X O].include?(marker) && marker.length == 1
+      marker
+    else
+      puts 'Enter X or O'
+      validate_marker(gets.chomp)
     end
   end
 end
