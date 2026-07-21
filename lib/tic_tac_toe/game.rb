@@ -42,6 +42,11 @@ class Game
       player = player_turn
       board.display_grid
       p check_winner
+      if check_winner
+        board.display_grid
+        puts "#{@@previous_player.name}: #{@@previous_player.marker} wins!"
+        break
+      end
       print "#{player.name}'s turn, choose a number to mark:"
       point = gets.chomp.to_i
       if point.between?(1, 9) && point.is_a?(Integer)
@@ -49,10 +54,6 @@ class Game
         system 'clear'
       else
         print 'Enter a valid number between 1 and 9:'
-      end
-      if check_winner
-        puts "#{player.name} wins!"
-        break
       end
     end
   end
@@ -79,22 +80,23 @@ class Game
   end
 
   def check_winner
+    winner = false
     # horizontal check
-    if @board.grid.slice(0, 3).all?('X' || 'O')
-      return true
-    elsif @board.grid.slice(3, 3).all?('X' || 'O') # rubocop:disable Lint/DuplicateBranch
-      return true
-    elsif @board.grid.slice(6, 3).all?('X' || 'O') # rubocop:disable Lint/DuplicateBranch
-      return true
+    [[0, 1, 2],
+     [3, 4, 5],
+     [6, 7, 8],
+     [0, 3, 6],
+     [1, 4, 6],
+     [2, 5, 8],
+     [0, 4, 8],
+     [6, 4, 2]].each do |wins|
+      %w[X O].each do |marker|
+        if @board.grid.values_at(wins[0], wins[1], wins[2]).all?(marker)
+          p @board.grid
+          winner = true
+        end
+      end
     end
-
-    # vertical check
-    # column 1
-    # if @board.grid.select { |item| @board.grid.index(item) % 3 == 0}.all?('X' || 'O')
-    #   p @board.grid
-    #   return true
-    # end
-
-    false
+    winner
   end
 end
