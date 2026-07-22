@@ -24,6 +24,8 @@ class Board
   end
 
   def set_gridpoint(marker, point)
+    # Validate marker point by making sure no...
+    # ...marker already exists
     @board_array[point - 1] = marker
   end
 end
