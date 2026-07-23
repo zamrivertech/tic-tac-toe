@@ -26,6 +26,12 @@ class Board
   def set_gridpoint(marker, point)
     # Validate marker point by making sure no...
     # ...marker already exists
-    @board_array[point - 1] = marker
+    if @board_array[point - 1].nil?
+      @board_array[point - 1] = marker
+    else
+      puts 'Choose another point'
+      # prompt to same player to choose another spot
+      # or return marked if true or not after attempt action
+    end
   end
 end

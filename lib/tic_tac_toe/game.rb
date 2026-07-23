@@ -19,37 +19,38 @@ class Game
   def player_grid(board) # rubocop:disable Metrics/MethodLength
     # @board.grid.include?(nil)
     while true # break if winner exists # rubocop:disable Style/InfiniteLoop
-      player = player_switch(@@current_player)
+      player_switch # player swicth calls player start
       board.display_grid
-      p player
       if check_winner
         board.display_grid
         puts "#{@@previous_player.name}: #{@@previous_player.marker} wins!"
         break
       end
-      print "#{player.name}'s turn, choose a number to mark:"
+      print "#{@@current_player.name}'s turn, choose a number to mark:"
       point = gets.chomp.to_i
       if point.between?(1, 9) && point.is_a?(Integer)
-        board.set_gridpoint(player.marker, point)
-        player_switch(@@current_player)
-        system 'clear'
+        board.set_gridpoint(@@current_player.marker, point)
       else
         print 'Enter a valid number between 1 and 9:'
       end
     end
   end
 
-  def player_switch(current_player)
+  # switch player does not switch
+  def player_switch
     if @@current_player.nil?
       player_start
-    elsif current_player == @player1
+    elsif @@current_player == @player1
       @@previous_player = @player1 # rubocop:disable Style/ClassVars
       @@current_player = @player2 # rubocop:disable Style/ClassVars
+      puts 'swicth 1 to 2'
+      p @@current_player
       @current_player
-    elsif current_player == @player2
+    elsif @@current_player == @player2
       @@previous_player = @player2 # rubocop:disable Style/ClassVars
       @@current_player = @player1 # rubocop:disable Style/ClassVars
-      @player1
+      puts 'swicth 2 to 1'
+      @@current_player
     end
   end
 
@@ -71,8 +72,8 @@ class Game
      [2, 5, 8], [0, 4, 8], [6, 4, 2]].each do |wins|
       %w[X O].each do |marker|
         if @board.grid.values_at(wins[0], wins[1], wins[2]).all?(marker)
-          p @board.grid
           winner = true
+          break
         end
       end
     end
