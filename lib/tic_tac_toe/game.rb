@@ -19,7 +19,7 @@ class Game
   def player_grid(board) # rubocop:disable Metrics/MethodLength
     # @board.grid.include?(nil)
     while true # break if winner exists # rubocop:disable Style/InfiniteLoop
-      player_switch # player swicth calls player start
+      player_start
       board.display_grid
       if check_winner
         board.display_grid
@@ -28,19 +28,17 @@ class Game
       end
       print "#{@@current_player.name}'s turn, choose a number to mark:"
       point = gets.chomp.to_i
-      if point.between?(1, 9) && point.is_a?(Integer)
+      if @board.valid_gridpoint?(point)
         board.set_gridpoint(@@current_player.marker, point)
+        player_switch # player swicth calls player start
       else
-        print 'Enter a valid number between 1 and 9:'
+        print 'Enter a valid point between 1 and 9:'
       end
     end
   end
 
-  # switch player does not switch
   def player_switch
-    if @@current_player.nil?
-      player_start
-    elsif @@current_player == @player1
+    if @@current_player == @player1
       @@previous_player = @player1 # rubocop:disable Style/ClassVars
       @@current_player = @player2 # rubocop:disable Style/ClassVars
       puts 'swicth 1 to 2'
@@ -55,14 +53,16 @@ class Game
   end
 
   def player_start
+    return unless @@current_player.nil?
+
     print 'Enter starting player (1/2):'
     player = gets.chomp.to_i
     if player == 1
       @@current_player = @player1 # rubocop:disable Style/ClassVars
-      return @@current_player # rubocop:disable Style/RedundantReturn,Style/IdenticalConditionalBranches
-    else
+      return @@current_player # rubocop:disable Style/RedundantReturn
+    elsif player == 2
       @@current_player = @player2 # rubocop:disable Style/ClassVars
-      return @@current_player # rubocop:disable Style/RedundantReturn,Style/IdenticalConditionalBranches
+      return @@current_player # rubocop:disable Style/RedundantReturn
     end
   end
 

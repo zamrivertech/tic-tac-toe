@@ -23,15 +23,13 @@ class Board
     puts '========='
   end
 
+  def valid_gridpoint?(point)
+    return true if point.between?(1, 9) && point.is_a?(Integer) && @board_array[point - 1].nil?
+
+    false
+  end
+
   def set_gridpoint(marker, point)
-    # Validate marker point by making sure no...
-    # ...marker already exists
-    if @board_array[point - 1].nil?
-      @board_array[point - 1] = marker
-    else
-      puts 'Choose another point'
-      # prompt to same player to choose another spot
-      # or return marked if true or not after attempt action
-    end
+    @board_array[point - 1] = marker
   end
 end
