@@ -1,7 +1,7 @@
 # Game class: responsible for game logic and flow
 class Game
   @@previous_player = nil # rubocop:disable Style/ClassVars
-  @@current_player = nil
+  @@current_player = nil # rubocop:disable Style/ClassVars
 
   def initialize
     intro
@@ -17,12 +17,11 @@ class Game
   end
 
   def player_grid(board) # rubocop:disable Metrics/MethodLength
-    # @board.grid.include?(nil)
-    while true # break if winner exists # rubocop:disable Style/InfiniteLoop
+    while true # rubocop:disable Style/InfiniteLoop
+      system 'clear'
       player_start
       board.display_grid
       if check_winner
-        board.display_grid
         puts "#{@@previous_player.name}: #{@@previous_player.marker} wins!"
         break
       end
@@ -30,9 +29,7 @@ class Game
       point = gets.chomp.to_i
       if @board.valid_gridpoint?(point)
         board.set_gridpoint(@@current_player.marker, point)
-        player_switch # player swicth calls player start
-      else
-        print 'Enter a valid point between 1 and 9:'
+        player_switch
       end
     end
   end
@@ -41,13 +38,10 @@ class Game
     if @@current_player == @player1
       @@previous_player = @player1 # rubocop:disable Style/ClassVars
       @@current_player = @player2 # rubocop:disable Style/ClassVars
-      puts 'swicth 1 to 2'
-      p @@current_player
       @current_player
     elsif @@current_player == @player2
       @@previous_player = @player2 # rubocop:disable Style/ClassVars
       @@current_player = @player1 # rubocop:disable Style/ClassVars
-      puts 'swicth 2 to 1'
       @@current_player
     end
   end
